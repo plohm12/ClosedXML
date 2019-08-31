@@ -6030,7 +6030,7 @@ namespace ClosedXML.Excel
 
             if (dataType == XLDataType.Text)
             {
-                if (!xlCell.Style.IncludeQuotePrefix && xlCell.InnerText.Length == 0)
+                if (!xlCell.StyleValue.IncludeQuotePrefix && xlCell.InnerText.Length == 0)
                     openXmlCell.CellValue = null;
                 else
                 {
