@@ -728,7 +728,7 @@ namespace ClosedXML.Excel
             NamedRanges = new XLNamedRanges(this);
             CustomProperties = new XLCustomProperties(this);
             ShapeIdManager = new XLIdManager();
-            Author = Environment.UserName;
+            //Author = Environment.UserName;
         }
 
         public XLWorkbook(LoadOptions loadOptions)

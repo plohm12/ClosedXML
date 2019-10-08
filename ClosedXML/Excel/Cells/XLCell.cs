@@ -1,4 +1,4 @@
-﻿using FastMember;
+﻿//using FastMember;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -859,9 +859,9 @@ namespace ClosedXML.Excel
             {
                 const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
                 var memberCache = new Dictionary<Type, IEnumerable<MemberInfo>>();
-                var accessorCache = new Dictionary<Type, TypeAccessor>();
+                //var accessorCache = new Dictionary<Type, TypeAccessor>();
                 IEnumerable<MemberInfo> members = null;
-                TypeAccessor accessor = null;
+                //TypeAccessor accessor = null;
                 bool isPlainObject = itemType == typeof(object);
 
                 if (!isPlainObject)
@@ -870,7 +870,7 @@ namespace ClosedXML.Excel
                          .Concat(itemType.GetProperties(bindingFlags))
                          .Where(mi => !XLColumnAttribute.IgnoreMember(mi))
                          .OrderBy(mi => XLColumnAttribute.GetOrder(mi));
-                    accessor = TypeAccessor.Create(itemType);
+                    //accessor = TypeAccessor.Create(itemType);
                 }
 
                 foreach (T m in data)
@@ -907,7 +907,7 @@ namespace ClosedXML.Excel
 
                             if (!memberCache.ContainsKey(type))
                             {
-                                var _accessor = TypeAccessor.Create(type);
+                                //var _accessor = TypeAccessor.Create(type);
 
                                 var _members = type.GetFields(bindingFlags).Cast<MemberInfo>()
                                      .Concat(type.GetProperties(bindingFlags))
@@ -915,11 +915,11 @@ namespace ClosedXML.Excel
                                      .OrderBy(mi => XLColumnAttribute.GetOrder(mi));
 
                                 memberCache.Add(type, _members);
-                                accessorCache.Add(type, _accessor);
+                                //accessorCache.Add(type, _accessor);
                             }
 
                             members = memberCache[type];
-                            accessor = accessorCache[type];
+                            //accessor = accessorCache[type];
                         }
 
                         if (isArray)
@@ -1012,7 +1012,8 @@ namespace ClosedXML.Excel
                                 else if (mi.MemberType == MemberTypes.Field && (mi as FieldInfo).IsStatic)
                                     Worksheet.SetValue((mi as FieldInfo).GetValue(null), currentRowNumber, currentColumnNumber);
                                 else
-                                    Worksheet.SetValue(accessor[m, mi.Name], currentRowNumber, currentColumnNumber);
+                                    throw new InvalidOperationException($"Unable to access member {mi.Name} of type {m.GetType().Name}");
+                                    //Worksheet.SetValue(accessor[m, mi.Name], currentRowNumber, currentColumnNumber);
 
                                 incrementFieldPosition();
                             }

@@ -169,17 +169,17 @@ namespace ClosedXML
             return newPath;
         }
 
-        public static string EvaluateAbsolutePath(string rootPath, string relativePath)
-        {
-            lock (ms_syncAbsolutePathObj)
-            {
-                string _temp = Environment.CurrentDirectory;
-                Environment.CurrentDirectory = rootPath;
-                string _result = Path.GetFullPath(relativePath);
-                Environment.CurrentDirectory = _temp;
-                return _result;
-            }
-        }
+        //public static string EvaluateAbsolutePath(string rootPath, string relativePath)
+        //{
+        //    lock (ms_syncAbsolutePathObj)
+        //    {
+        //        string _temp = Environment.CurrentDirectory;
+        //        Environment.CurrentDirectory = rootPath;
+        //        string _result = Path.GetFullPath(relativePath);
+        //        Environment.CurrentDirectory = _temp;
+        //        return _result;
+        //    }
+        //}
 
         public static bool TryCreateFile(string filePath, out string message)
         {
