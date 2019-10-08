@@ -48,6 +48,7 @@
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net46' ">
     <DefineConstants>$(DefineConstants);_NETFRAMEWORK_;_NET46_</DefineConstants>
+    <DebugType>Full</DebugType>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
